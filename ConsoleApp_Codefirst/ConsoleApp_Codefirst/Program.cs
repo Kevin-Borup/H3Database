@@ -35,8 +35,8 @@ namespace ConsoleApp_Codefirst
                 context.SaveChanges();
 
                 // Retrieve the student
-                var retrievedStudent = context.Students.FirstOrDefault(s => s.name == "John Doe");
-                Console.WriteLine($"Retrieved Student: {retrievedStudent.name}, Student Number: {retrievedStudent.studentNumber}");
+                var retrievedStudent = context.Students.FirstOrDefault(s => s.Name == "John Doe");
+                Console.WriteLine($"Retrieved Student: {retrievedStudent.Name}, Student Number: {retrievedStudent.studentNumber}");
             }
         }
     }

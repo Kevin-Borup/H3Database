@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp_Codefirst
 {
-
     public class Person
     {
         [Key]
@@ -18,6 +17,14 @@ namespace ConsoleApp_Codefirst
         public Address Address { get; set; }
         public LibraryCard LibraryCard { get; set; }
 
+        // Parameterless constructor
+        public Person()
+        {
+            Address = new Address();
+            LibraryCard = new LibraryCard();
+        }
+
+        // Parameterized constructor
         public Person(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
         {
             Id = id;
@@ -38,7 +45,6 @@ namespace ConsoleApp_Codefirst
         }
     }
 
-
     public class Teacher : Person
     {
         public string subject { get; set; }
@@ -52,7 +58,7 @@ namespace ConsoleApp_Codefirst
     public class Student : Person
     {
         public int studentNumber { get; set; }
-        public double averageMark 
+        public double averageMark
         {
             get
             {
@@ -62,7 +68,7 @@ namespace ConsoleApp_Codefirst
         }
         public List<Grade> grades { get; set; }
         public List<Course> courses { get; set; }
-        public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country) : base(id, name,phoneNumber, emailAddress, street, city, state, zipcode, country)
+        public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country) : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
         {
             this.studentNumber = studentNumber;
             this.grades = null;
@@ -72,7 +78,7 @@ namespace ConsoleApp_Codefirst
 
     public class LibraryCard
     {
-        [Key] // Add this annotation
+        [Key]
         public int UserId { get; set; }
         public int RentedBooks { get; set; }
         public DateTime CreationDate { get; set; }
@@ -80,7 +86,7 @@ namespace ConsoleApp_Codefirst
 
     public class Address
     {
-        public int Id { get; set; } // Add an Id property as the primary key
+        public int Id { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -90,20 +96,19 @@ namespace ConsoleApp_Codefirst
 
     public class Course
     {
-        [Key] // Add this annotation
+        [Key]
         public int CourseID { get; set; }
         public string CourseName { get; set; }
         public List<Student> Students { get; set; }
         public List<Teacher> Teachers { get; set; }
     }
 
-
     public class Grade
     {
         [Required]
         public int gradeID { get; set; }
-        [Required]   
-        public string subject { get; set;}
+        [Required]
+        public string subject { get; set; }
         [Required]
         public int value { get; set; }
     }
