@@ -37,3 +37,6 @@ Data Annotaions:
 
     Definere required de nødvendige steder
     Et behov for at definere Column datatypen, er hvis classen har et billede i byte[], men vi oplagre det i Byte65 på Serveren.
+
+Scaffold-DbContext
+    Scaffold-DbContext "Server=.\SQL2019;Database=SchoolDBRingsted;Encrypt=False;Trusted_Connection=True;Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
