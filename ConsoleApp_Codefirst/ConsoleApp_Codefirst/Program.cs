@@ -29,12 +29,7 @@ namespace ConsoleApp_Codefirst
             {
                 // Perform CRUD operations here
                 // Example: Adding a student
-                var newStudent = new Student
-                {
-                    name = "John Doe",
-                    studentNumber = 12345,
-                    averageMark = 85.5
-                };
+                var newStudent = new Student(1, 1, "John Doe", "90807060", "Johndoe@email.com", "John steet", "John city", "John York", 22324, "Johnland");
 
                 context.Students.Add(newStudent);
                 context.SaveChanges();
