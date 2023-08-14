@@ -10,32 +10,34 @@ namespace ConsoleApp_Codefirst
 
     public class Person
     {
-        [Required]
-        public int id { get; set; }
-        public string name { get; set; }
-        public string phoneNumber { get; set; }
-        public string emailAddress { get; set; }
-        public Address address { get; set; }
-        public LibraryCard? libraryCard { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string EmailAddress { get; set; }
+        public Address Address { get; set; }
+        public LibraryCard LibraryCard { get; set; }
+
         public Person(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
         {
-            this.id = id;
-            this.name = name;
-            this.phoneNumber = phoneNumber;
-            this.emailAddress = emailAddress;
+            Id = id;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            EmailAddress = emailAddress;
 
-            this.libraryCard = null;
+            LibraryCard = null;
 
-            address = new Address()
+            Address = new Address
             {
-                street = street,
-                city = city,
-                state = state,
-                zipcode = zipcode,
-                country = country
+                Street = street,
+                City = city,
+                State = state,
+                Zipcode = zipcode,
+                Country = country
             };
         }
     }
+
 
     public class Teacher : Person
     {
@@ -70,29 +72,31 @@ namespace ConsoleApp_Codefirst
 
     public class LibraryCard
     {
-        [Required]
-        public int userID { get; set; }
-        public int rentedBooks { get; set; }
-        public DateTime creationDate { get; set; }
+        [Key] // Add this annotation
+        public int UserId { get; set; }
+        public int RentedBooks { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 
     public class Address
-    { 
-        public string street { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public int zipcode { get; set; }
-        public string country { get; set; }
+    {
+        public int Id { get; set; } // Add an Id property as the primary key
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int Zipcode { get; set; }
+        public string Country { get; set; }
     }
 
     public class Course
     {
-        [Required]
-        public int courseID { get; set; }
-        public string courseName { get; set; }
-        public List<Student> students { get; set; }
-        public List<Teacher> teachers { get; set; }
+        [Key] // Add this annotation
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+        public List<Student> Students { get; set; }
+        public List<Teacher> Teachers { get; set; }
     }
+
 
     public class Grade
     {
