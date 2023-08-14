@@ -1,0 +1,31 @@
+Opgave: Udvikling af en Fiktiv Skole Database med Code-First Approach og ORM
+
+I denne opgave vil du blive bedt om at udvikle en fiktiv skole database ved hjælp af Code-First tilgangen og et ORM-framework. Formålet med opgaven er at demonstrere din evne til at designe databasestrukturer, oprette relationer mellem tabeller og udføre CRUD-operationer (Create, Read, Update, Delete) på databasen. Du skal også inkludere et eksempel på klassearv for at vise din forståelse af dette koncept.
+
+Trin 1: Design af Database
+1. Definer tre tabeller: "Elever," "Klasselokaler" og "Lærere."
+2. Opret en klasse for hver tabel med relevante attributter (f.eks. navn, alder, klasseværelse nummer osv.).
+3. Implementer arv ved at oprette en "Lærer" klasse, der arver fra en "Personale" klasse eller en lignende klasse.
+4. Opret passende relationer mellem tabellerne, f.eks. en én-til-mange-relation mellem "Klasselokaler" og "Elever," samt en mange-til-mange-relation mellem "Lærere" og "Klasselokaler."
+
+Trin 2: ORM-Implementering
+1. Vælg et ORM-framework (f.eks. Entity Framework, SQLAlchemy osv.) og opret et projekt.
+2. Brug ORM-frameworket til at generere databasen ud fra dine klassedefinitioner.
+3. Konfigurer ORM-mapping for at håndtere relationer mellem tabellerne korrekt.
+
+Trin 3: CRUD-operationer
+1. Implementer CRUD-operationer for mindst en af dine klasser (f.eks. "Elever" eller "Lærere").
+2. For hver klasse skal du oprette funktioner/metoder til at oprette, læse, opdatere og slette poster i databasen.
+
+Trin 4: Test og Dokumentation
+1. Opret testcases for at sikre, at dine CRUD-operationer fungerer som forventet.
+2. Udfør tests for at validere funktionaliteten af din database og CRUD-operationer.
+3. Opret en kort dokumentation, der beskriver din databasestruktur, relationer og de implementerede CRUD-operationer.
+
+Afsluttende bemærkninger:
+- Du er velkommen til at vælge det ORM-framework og programmeringssprog, du er mest fortrolig med.
+- Sørg for, at din kode er veldokumenteret og følger god praksis inden for database- og softwareudvikling.
+- Hvis du ønsker det, kan du udvide opgaven ved at inkludere flere tabeller, relationer og operationer.
+
+Vurdering:
+Du vil blive vurderet ud fra din evne til at designe en passende databasestruktur, oprette korrekte relationer mellem tabellerne, implementere CRUD-operationer og demonstrere klassearv. Din kodekvalitet, dokumentation og testcases vil også blive vurderet.
