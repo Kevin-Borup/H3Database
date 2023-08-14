@@ -1,0 +1,31 @@
+Forskning: Entity Framework
+    • Hvad er de vigtigste funktioner i dette ORM-framework?
+        Model skabelse, Querying og gemme data.
+        Der er en god hurtigt input validation.
+
+
+    • Hvordan håndterer dette ORM-framework relationer mellem forskellige tabeller (one-to-one, one-to-many, og many-to-many)?
+        One-To-One:     Skabes ved at en class indeholder en anden class og vice versa. Student indeholder en StudentAddress, StudentAddress indeholder en Student.
+        One-To-Many:    Skabes ved at en class indeholder en anden class, men den class peger ikke tilbage, derved er den class ikke unik til den. Student indeholder en grade, men grade indholder ikke en student, derved kan mange students have den samme grade.
+        Many-To-Many:   Skabes ved at en class indeholder en liste af en anden class, og den class indeholder en liste af den forrige class. En student har en liste af kurser, og en kurse har en liste af alle studenter.
+
+
+    • Hvordan bruger dette ORM-framework migrations til at styre ændringer i databasens skema?
+        Entity Framework har mulighed for en automatisk migration og/eller en code-based migration.
+            Automatic: Med en migration kan den opdatere ændringer og skaber en migrationHistory table
+            Code: Skab en migration class, som indeholder en up og down. Up indeholder creation, Down indeholder drop/deletes
+
+    • Hvordan kan man optimere ydeevnen med dette ORM-framework?
+        Man kan bede den om ikke at track changes ved ReadOnly ops, ved hjælp af AsNoTracking
+        Brug Include for at undgå nested queries.
+        Undgå at fetch alle fields hvis ikke nødvendigt, med en select new.
+        Brug Compiled Query
+        LINQ contains er tung.
+        LINQ Pad .Dump() kan hjælpe med performance og debugging.
+        Lav seperate Entity Models, hvis de ikke behøves at ligge i en, da det gør operationer tungere, desto større den er.
+
+    • Hvordan håndterer dette ORM-framework arv i både Code-First og Database-First tilgange?
+        Code-First:
+                Med CbContext og DbSet, derefter bruger man den class, tilføjer og gemmer.
+        Database-First:
+                Med Scaffold-DbContext command kan den skabe DotNet opsætningen af din eksisterende database, og lader dig forsætte derfra med EF.

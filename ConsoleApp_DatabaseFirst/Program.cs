@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp_ORM
+﻿namespace ConsoleApp_DatabaseFirst
 {
     internal class Program
     {
