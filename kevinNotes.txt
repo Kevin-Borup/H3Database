@@ -29,3 +29,11 @@ Forskning: Entity Framework
                 Med CbContext og DbSet, derefter bruger man den class, tilføjer og gemmer.
         Database-First:
                 Med Scaffold-DbContext command kan den skabe DotNet opsætningen af din eksisterende database, og lader dig forsætte derfra med EF.
+
+
+
+Data Annotaions:
+    https://www.entityframeworktutorial.net/code-first/dataannotation-in-code-first.aspx
+
+    Definere required de nødvendige steder
+    Et behov for at definere Column datatypen, er hvis classen har et billede i byte[], men vi oplagre det i Byte65 på Serveren.
