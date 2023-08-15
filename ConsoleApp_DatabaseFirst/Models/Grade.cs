@@ -5,11 +5,11 @@ namespace ConsoleApp_DatabaseFirst.Models;
 
 public partial class Grade
 {
-    public int GradeId { get; set; }
+    public Guid GradeId { get; set; }
 
-    public string? Subject { get; set; }
+    public string Subject { get; set; } = null!;
 
-    public float? Value { get; set; }
+    public float Value { get; set; }
 
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 }
