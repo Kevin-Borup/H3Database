@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ConsoleApp_Codefirst.Migrations
 {
     /// <inheritdoc />
-    public partial class schoolDbCph1 : Migration
+    public partial class SchoolDBCph1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

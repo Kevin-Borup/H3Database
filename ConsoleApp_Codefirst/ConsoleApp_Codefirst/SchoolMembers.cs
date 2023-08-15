@@ -67,6 +67,7 @@ namespace ConsoleApp_Codefirst
         {
             get
             {
+                //Calculated on get
                 return 7;
             }
         }

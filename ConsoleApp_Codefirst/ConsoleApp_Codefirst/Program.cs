@@ -23,6 +23,14 @@ namespace ConsoleApp_Codefirst
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Person>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<Teacher>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<Student>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<Grade>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<Address>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<Course>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<LibraryCard>(e => e.UseTpcMappingStrategy());
         }
     }
 
