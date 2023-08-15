@@ -19,7 +19,7 @@ public partial class Person
 
     public virtual LibraryCard? LibraryCard { get; set; }
 
-    public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+    public virtual Student? Student { get; set; }
 
-    public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+    public virtual Teacher? Teacher { get; set; }
 }

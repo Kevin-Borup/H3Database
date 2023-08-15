@@ -7,7 +7,7 @@ public partial class Teacher
 {
     public Guid PersonId { get; set; }
 
-    public Guid TeacherId { get; set; }
+    public int TeacherId { get; set; }
 
     public float? Salary { get; set; }
 

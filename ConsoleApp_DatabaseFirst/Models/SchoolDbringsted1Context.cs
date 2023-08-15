@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp_DatabaseFirst.Models;
 
-public partial class SchoolDbringstedContext : DbContext
+public partial class SchoolDbringsted1Context : DbContext
 {
-    public SchoolDbringstedContext()
+    public SchoolDbringsted1Context()
     {
     }
 
-    public SchoolDbringstedContext(DbContextOptions<SchoolDbringstedContext> options)
+    public SchoolDbringsted1Context(DbContextOptions<SchoolDbringsted1Context> options)
         : base(options)
     {
     }
@@ -31,13 +31,13 @@ public partial class SchoolDbringstedContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.\\SQL2019;Database=SchoolDBRingsted;Encrypt=False;Trusted_Connection=True;Integrated Security=True;");
+        => optionsBuilder.UseSqlServer("Server=.\\SQL2019;Database=SchoolDBRingsted1;Encrypt=False;Trusted_Connection=True;Integrated Security=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Addresse__3214EC276F7446CE");
+            entity.HasKey(e => e.Id).HasName("PK__Addresse__3214EC27E9791045");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -58,7 +58,7 @@ public partial class SchoolDbringstedContext : DbContext
 
         modelBuilder.Entity<Course>(entity =>
         {
-            entity.HasKey(e => e.CourseId).HasName("PK__Courses__C92D71871758DFC5");
+            entity.HasKey(e => e.CourseId).HasName("PK__Courses__C92D718750F193D9");
 
             entity.Property(e => e.CourseId)
                 .ValueGeneratedNever()
@@ -70,7 +70,7 @@ public partial class SchoolDbringstedContext : DbContext
 
         modelBuilder.Entity<Grade>(entity =>
         {
-            entity.HasKey(e => e.GradeId).HasName("PK__Grades__54F87A3774D1F6DD");
+            entity.HasKey(e => e.GradeId).HasName("PK__Grades__54F87A379A37D90F");
 
             entity.Property(e => e.GradeId)
                 .ValueGeneratedNever()
@@ -82,7 +82,7 @@ public partial class SchoolDbringstedContext : DbContext
 
         modelBuilder.Entity<LibraryCard>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__LibraryC__1788CCAC5796F173");
+            entity.HasKey(e => e.UserId).HasName("PK__LibraryC__1788CCACEB43875F");
 
             entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
@@ -92,12 +92,12 @@ public partial class SchoolDbringstedContext : DbContext
             entity.HasOne(d => d.User).WithOne(p => p.LibraryCard)
                 .HasForeignKey<LibraryCard>(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LibraryCa__UserI__6C6E1476");
+                .HasConstraintName("FK__LibraryCa__UserI__3E1D39E1");
         });
 
         modelBuilder.Entity<Person>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Persons__3214EC27AA1568CE");
+            entity.HasKey(e => e.Id).HasName("PK__Persons__3214EC272BB401AD");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -115,22 +115,24 @@ public partial class SchoolDbringstedContext : DbContext
 
             entity.HasOne(d => d.Address).WithMany(p => p.People)
                 .HasForeignKey(d => d.AddressId)
-                .HasConstraintName("FK__Persons__Address__6991A7CB");
+                .HasConstraintName("FK__Persons__Address__3B40CD36");
         });
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.StudentId).HasName("PK__Students__32C52A790BEE4515");
+            entity.HasKey(e => e.PersonId).HasName("PK__Students__AA2FFB857813EE85");
 
-            entity.Property(e => e.StudentId)
+            entity.HasIndex(e => e.StudentId, "UQ__Students__32C52A78BF53C87A").IsUnique();
+
+            entity.Property(e => e.PersonId)
                 .ValueGeneratedNever()
-                .HasColumnName("StudentID");
-            entity.Property(e => e.PersonId).HasColumnName("PersonID");
+                .HasColumnName("PersonID");
+            entity.Property(e => e.StudentId).HasColumnName("StudentID");
 
-            entity.HasOne(d => d.Person).WithMany(p => p.Students)
-                .HasForeignKey(d => d.PersonId)
+            entity.HasOne(d => d.Person).WithOne(p => p.Student)
+                .HasForeignKey<Student>(d => d.PersonId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Students__Person__6F4A8121");
+                .HasConstraintName("FK__Students__Person__41EDCAC5");
 
             entity.HasMany(d => d.Courses).WithMany(p => p.Students)
                 .UsingEntity<Dictionary<string, object>>(
@@ -138,16 +140,17 @@ public partial class SchoolDbringstedContext : DbContext
                     r => r.HasOne<Course>().WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__StudentCo__Cours__79C80F94"),
+                        .HasConstraintName("FK__StudentCo__Cours__4D5F7D71"),
                     l => l.HasOne<Student>().WithMany()
+                        .HasPrincipalKey("StudentId")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__StudentCo__Stude__78D3EB5B"),
+                        .HasConstraintName("FK__StudentCo__Stude__4C6B5938"),
                     j =>
                     {
-                        j.HasKey("StudentId", "CourseId").HasName("PK__StudentC__5E57FD61C855EBC3");
+                        j.HasKey("StudentId", "CourseId").HasName("PK__StudentC__5E57FD615B482283");
                         j.ToTable("StudentCourses");
-                        j.IndexerProperty<Guid>("StudentId").HasColumnName("StudentID");
+                        j.IndexerProperty<int>("StudentId").HasColumnName("StudentID");
                         j.IndexerProperty<Guid>("CourseId").HasColumnName("CourseID");
                     });
 
@@ -157,33 +160,36 @@ public partial class SchoolDbringstedContext : DbContext
                     r => r.HasOne<Grade>().WithMany()
                         .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__StudentGr__Grade__7D98A078"),
+                        .HasConstraintName("FK__StudentGr__Grade__51300E55"),
                     l => l.HasOne<Student>().WithMany()
+                        .HasPrincipalKey("StudentId")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__StudentGr__Stude__7CA47C3F"),
+                        .HasConstraintName("FK__StudentGr__Stude__503BEA1C"),
                     j =>
                     {
-                        j.HasKey("StudentId", "GradeId").HasName("PK__StudentG__578AADDA4ACC3FA9");
+                        j.HasKey("StudentId", "GradeId").HasName("PK__StudentG__578AADDA82164904");
                         j.ToTable("StudentGrades");
-                        j.IndexerProperty<Guid>("StudentId").HasColumnName("StudentID");
+                        j.IndexerProperty<int>("StudentId").HasColumnName("StudentID");
                         j.IndexerProperty<Guid>("GradeId").HasColumnName("GradeID");
                     });
         });
 
         modelBuilder.Entity<Teacher>(entity =>
         {
-            entity.HasKey(e => e.TeacherId).HasName("PK__Teachers__EDF25944F3C760E8");
+            entity.HasKey(e => e.PersonId).HasName("PK__Teachers__AA2FFB857D29BF98");
 
-            entity.Property(e => e.TeacherId)
+            entity.HasIndex(e => e.TeacherId, "UQ__Teachers__EDF25945DBF975D4").IsUnique();
+
+            entity.Property(e => e.PersonId)
                 .ValueGeneratedNever()
-                .HasColumnName("TeacherID");
-            entity.Property(e => e.PersonId).HasColumnName("PersonID");
+                .HasColumnName("PersonID");
+            entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
 
-            entity.HasOne(d => d.Person).WithMany(p => p.Teachers)
-                .HasForeignKey(d => d.PersonId)
+            entity.HasOne(d => d.Person).WithOne(p => p.Teacher)
+                .HasForeignKey<Teacher>(d => d.PersonId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Teachers__Person__7226EDCC");
+                .HasConstraintName("FK__Teachers__Person__45BE5BA9");
 
             entity.HasMany(d => d.Courses).WithMany(p => p.Teachers)
                 .UsingEntity<Dictionary<string, object>>(
@@ -191,16 +197,17 @@ public partial class SchoolDbringstedContext : DbContext
                     r => r.HasOne<Course>().WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__TeacherCo__Cours__0169315C"),
+                        .HasConstraintName("FK__TeacherCo__Cours__55009F39"),
                     l => l.HasOne<Teacher>().WithMany()
+                        .HasPrincipalKey("TeacherId")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__TeacherCo__Teach__00750D23"),
+                        .HasConstraintName("FK__TeacherCo__Teach__540C7B00"),
                     j =>
                     {
-                        j.HasKey("TeacherId", "CourseId").HasName("PK__TeacherC__81608E5C65D0B692");
+                        j.HasKey("TeacherId", "CourseId").HasName("PK__TeacherC__81608E5C724E541B");
                         j.ToTable("TeacherCourses");
-                        j.IndexerProperty<Guid>("TeacherId").HasColumnName("TeacherID");
+                        j.IndexerProperty<int>("TeacherId").HasColumnName("TeacherID");
                         j.IndexerProperty<Guid>("CourseId").HasColumnName("CourseID");
                     });
         });

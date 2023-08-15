@@ -7,7 +7,7 @@ public partial class Student
 {
     public Guid PersonId { get; set; }
 
-    public Guid StudentId { get; set; }
+    public int StudentId { get; set; }
 
     public float? AverageMark { get; set; }
 
