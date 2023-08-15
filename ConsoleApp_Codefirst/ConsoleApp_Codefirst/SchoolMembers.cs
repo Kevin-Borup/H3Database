@@ -17,14 +17,11 @@ namespace ConsoleApp_Codefirst
         public Address Address { get; set; }
         public LibraryCard LibraryCard { get; set; }
 
-        // Parameterless constructor
         public Person()
         {
-            Address = new Address();
-            LibraryCard = new LibraryCard();
+            // Initialize properties if necessary
         }
 
-        // Parameterized constructor
         public Person(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
         {
             Id = id;
@@ -49,9 +46,16 @@ namespace ConsoleApp_Codefirst
     {
         public string subject { get; set; }
         public List<Course> courses { get; set; }
-        public Teacher(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country) : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
-        {
 
+        public Teacher()
+        {
+            // Initialize properties if necessary
+        }
+
+        public Teacher(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
+            : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
+        {
+            // Existing constructor logic
         }
     }
 
@@ -62,13 +66,19 @@ namespace ConsoleApp_Codefirst
         {
             get
             {
-                //Calculate average grades
                 return 7;
             }
         }
         public List<Grade> grades { get; set; }
         public List<Course> courses { get; set; }
-        public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country) : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
+
+        public Student()
+        {
+            // Initialize properties if necessary
+        }
+
+        public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
+            : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
         {
             this.studentNumber = studentNumber;
             this.grades = null;
