@@ -27,14 +27,11 @@ namespace ConsoleApp_Codefirst
         {
             using (var context = new SchoolDbCph())
             {
-                // Perform CRUD operations here
-                // Example: Adding a student
                 var newStudent = new Student(1, 1, "John Doe", "90807060", "Johndoe@email.com", "John steet", "John city", "John York", 22324, "Johnland");
 
                 context.Students.Add(newStudent);
                 context.SaveChanges();
 
-                // Retrieve the student
                 var retrievedStudent = context.Students.FirstOrDefault(s => s.Name == "John Doe");
                 Console.WriteLine($"Retrieved Student: {retrievedStudent.Name}, Student Number: {retrievedStudent.studentNumber}");
             }
