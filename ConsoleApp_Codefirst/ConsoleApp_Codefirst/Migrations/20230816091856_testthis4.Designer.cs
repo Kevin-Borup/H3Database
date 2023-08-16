@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleApp_Codefirst.Migrations
 {
     [DbContext(typeof(SchoolDbCph))]
-    [Migration("20230816065822_tptmig3")]
-    partial class tptmig3
+    [Migration("20230816091856_testthis4")]
+    partial class testthis4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,8 +55,6 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Addresses");
-
-                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Course", b =>
@@ -74,8 +72,6 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasKey("CourseID");
 
                     b.ToTable("Courses");
-
-                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Grade", b =>
@@ -101,8 +97,6 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Grades");
-
-                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.LibraryCard", b =>
@@ -122,8 +116,6 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("LibraryCards");
-
-                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Person", b =>
@@ -137,11 +129,15 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.Property<int>("AddressID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LibraryCardUserId")
+                    b.Property<int?>("LibraryCardUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -160,7 +156,9 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("People");
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("CourseStudent", b =>
@@ -193,6 +191,21 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.ToTable("CourseTeacher");
                 });
 
+            modelBuilder.Entity("GradeStudent", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("gradeID")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "gradeID");
+
+                    b.HasIndex("gradeID");
+
+                    b.ToTable("GradeStudent");
+                });
+
             modelBuilder.Entity("ConsoleApp_Codefirst.Student", b =>
                 {
                     b.HasBaseType("ConsoleApp_Codefirst.Person");
@@ -200,7 +213,7 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.Property<int>("studentID")
                         .HasColumnType("int");
 
-                    b.ToTable("Students");
+                    b.HasDiscriminator().HasValue("Student");
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Teacher", b =>
@@ -214,7 +227,7 @@ namespace ConsoleApp_Codefirst.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Teachers");
+                    b.HasDiscriminator().HasValue("Teacher");
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Grade", b =>
@@ -234,9 +247,7 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.HasOne("ConsoleApp_Codefirst.LibraryCard", "LibraryCard")
                         .WithMany()
-                        .HasForeignKey("LibraryCardUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LibraryCardUserId");
 
                     b.Navigation("Address");
 
@@ -273,20 +284,17 @@ namespace ConsoleApp_Codefirst.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ConsoleApp_Codefirst.Student", b =>
+            modelBuilder.Entity("GradeStudent", b =>
                 {
-                    b.HasOne("ConsoleApp_Codefirst.Person", null)
-                        .WithOne()
-                        .HasForeignKey("ConsoleApp_Codefirst.Student", "Id")
+                    b.HasOne("ConsoleApp_Codefirst.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("ConsoleApp_Codefirst.Teacher", b =>
-                {
-                    b.HasOne("ConsoleApp_Codefirst.Person", null)
-                        .WithOne()
-                        .HasForeignKey("ConsoleApp_Codefirst.Teacher", "Id")
+                    b.HasOne("ConsoleApp_Codefirst.Grade", null)
+                        .WithMany()
+                        .HasForeignKey("gradeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

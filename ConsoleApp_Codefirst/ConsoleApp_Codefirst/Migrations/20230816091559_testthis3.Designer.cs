@@ -4,6 +4,7 @@ using ConsoleApp_Codefirst;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleApp_Codefirst.Migrations
 {
     [DbContext(typeof(SchoolDbCph))]
-    partial class SchoolDbCphModelSnapshot : ModelSnapshot
+    [Migration("20230816091559_testthis3")]
+    partial class testthis3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,28 +29,34 @@ namespace ConsoleApp_Codefirst.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("IDs");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Cities");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Countries");
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("States");
 
                     b.Property<string>("Street")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Streets");
 
                     b.Property<int>("Zipcode")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Zipcodes");
 
                     b.HasKey("ID");
 
@@ -58,13 +67,15 @@ namespace ConsoleApp_Codefirst.Migrations
                 {
                     b.Property<int>("CourseID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("CourseIDs");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseID"));
 
                     b.Property<string>("CourseName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CourseNames");
 
                     b.HasKey("CourseID");
 
@@ -75,19 +86,23 @@ namespace ConsoleApp_Codefirst.Migrations
                 {
                     b.Property<int>("gradeID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("gradeIDs");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("gradeID"));
 
                     b.Property<int?>("StudentId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("StudentIds");
 
                     b.Property<string>("subject")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("subjects");
 
                     b.Property<int>("value")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("values");
 
                     b.HasKey("gradeID");
 
@@ -100,15 +115,18 @@ namespace ConsoleApp_Codefirst.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("UserIds");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationDates");
 
                     b.Property<int>("RentedBooks")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("RentedBooks");
 
                     b.HasKey("UserId");
 
@@ -119,31 +137,33 @@ namespace ConsoleApp_Codefirst.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Ids");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AddressID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int")
+                        .HasColumnName("AddressIDs");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EmailAddresses");
 
                     b.Property<int?>("LibraryCardUserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("LibraryCardUserIds");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Names");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PhoneNumbers");
 
                     b.HasKey("Id");
 
@@ -153,39 +173,41 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("People");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("CourseStudent", b =>
                 {
                     b.Property<int>("StudentsId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("StudentsIds");
 
                     b.Property<int>("coursesCourseID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("coursesCourseIDs");
 
                     b.HasKey("StudentsId", "coursesCourseID");
 
                     b.HasIndex("coursesCourseID");
 
-                    b.ToTable("CourseStudent");
+                    b.ToTable("CourseStudents");
                 });
 
             modelBuilder.Entity("CourseTeacher", b =>
                 {
                     b.Property<int>("TeachersId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("TeachersIds");
 
                     b.Property<int>("coursesCourseID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("coursesCourseIDs");
 
                     b.HasKey("TeachersId", "coursesCourseID");
 
                     b.HasIndex("coursesCourseID");
 
-                    b.ToTable("CourseTeacher");
+                    b.ToTable("CourseTeachers");
                 });
 
             modelBuilder.Entity("GradeStudent", b =>
@@ -208,9 +230,10 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasBaseType("ConsoleApp_Codefirst.Person");
 
                     b.Property<int>("studentID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("studentIDs");
 
-                    b.HasDiscriminator().HasValue("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Teacher", b =>
@@ -218,13 +241,15 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasBaseType("ConsoleApp_Codefirst.Person");
 
                     b.Property<int>("TeacherID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("TeacherIDs");
 
                     b.Property<string>("subject")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("subjects");
 
-                    b.HasDiscriminator().HasValue("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Grade", b =>
@@ -292,6 +317,24 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasOne("ConsoleApp_Codefirst.Grade", null)
                         .WithMany()
                         .HasForeignKey("gradeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleApp_Codefirst.Student", b =>
+                {
+                    b.HasOne("ConsoleApp_Codefirst.Person", null)
+                        .WithOne()
+                        .HasForeignKey("ConsoleApp_Codefirst.Student", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleApp_Codefirst.Teacher", b =>
+                {
+                    b.HasOne("ConsoleApp_Codefirst.Person", null)
+                        .WithOne()
+                        .HasForeignKey("ConsoleApp_Codefirst.Teacher", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

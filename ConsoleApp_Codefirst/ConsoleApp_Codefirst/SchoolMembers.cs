@@ -15,21 +15,20 @@ namespace ConsoleApp_Codefirst
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public Address Address { get; set; }
-        public LibraryCard LibraryCard { get; set; }
+        public LibraryCard? LibraryCard { get; set; }
 
         public Person()
         {
             // Initialize properties if necessary
         }
 
-        public Person(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
+        public Person(string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
         {
-            Id = id;
             Name = name;
             PhoneNumber = phoneNumber;
             EmailAddress = emailAddress;
 
-            LibraryCard = null;
+            //LibraryCard = null;
 
             Address = new Address
             {
@@ -39,6 +38,11 @@ namespace ConsoleApp_Codefirst
                 Zipcode = zipcode,
                 Country = country
             };
+        }
+
+        public Person GetPerson()
+        {
+            return (Person)this;
         }
     }
 
@@ -53,8 +57,8 @@ namespace ConsoleApp_Codefirst
             // Initialize properties if necessary
         }
 
-        public Teacher(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
-            : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
+        public Teacher(string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
+            : base(name, phoneNumber, emailAddress, street, city, state, zipcode, country)
         {
             // Existing constructor logic
         }
@@ -79,10 +83,9 @@ namespace ConsoleApp_Codefirst
             // Initialize properties if necessary
         }
 
-        public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
-            : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
+        public Student(string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
+            : base(name, phoneNumber, emailAddress, street, city, state, zipcode, country)
         {
-            this.studentID = studentNumber;
             this.grades = null;
             this.courses = null;
         }
@@ -119,7 +122,6 @@ namespace ConsoleApp_Codefirst
     public class Grade
     {
         [Required]
-        [Key]
         public int gradeID { get; set; }
         [Required]
         public string subject { get; set; }
