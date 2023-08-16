@@ -5,9 +5,9 @@ namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class Student
 {
-    public Guid PersonId { get; set; }
+    public Guid PersonID { get; set; }
 
-    public int StudentId { get; set; }
+    public int StudentID { get; set; }
 
     public float? AverageMark { get; set; }
 

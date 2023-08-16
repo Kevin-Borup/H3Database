@@ -5,9 +5,9 @@ namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class Teacher
 {
-    public Guid PersonId { get; set; }
+    public Guid PersonID { get; set; }
 
-    public int TeacherId { get; set; }
+    public int TeacherID { get; set; }
 
     public float? Salary { get; set; }
 

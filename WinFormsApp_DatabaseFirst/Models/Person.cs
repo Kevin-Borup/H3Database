@@ -5,7 +5,7 @@ namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class Person
 {
-    public Guid Id { get; set; }
+    public Guid ID { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -13,7 +13,7 @@ public partial class Person
 
     public string? EmailAddress { get; set; }
 
-    public Guid? AddressId { get; set; }
+    public Guid? AddressID { get; set; }
 
     public virtual Address? Address { get; set; }
 

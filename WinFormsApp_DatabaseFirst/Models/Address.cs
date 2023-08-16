@@ -5,7 +5,7 @@ namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class Address
 {
-    public Guid Id { get; set; }
+    public Guid ID { get; set; }
 
     public string? Street { get; set; }
 

@@ -5,7 +5,7 @@ namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class Course
 {
-    public Guid CourseId { get; set; }
+    public Guid CourseID { get; set; }
 
     public string Name { get; set; } = null!;
 

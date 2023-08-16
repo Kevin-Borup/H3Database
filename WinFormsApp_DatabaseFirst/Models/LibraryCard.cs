@@ -5,7 +5,7 @@ namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class LibraryCard
 {
-    public Guid UserId { get; set; }
+    public Guid UserID { get; set; }
 
     public int RentedBooks { get; set; }
 
