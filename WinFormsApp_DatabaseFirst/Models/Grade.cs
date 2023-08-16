@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp_DatabaseFirst.Models;
+namespace WinFormsApp_DatabaseFirst.Models;
 
 public partial class Grade
 {
-    public Guid GradeId { get; set; }
+    public Guid GradeID { get; set; }
 
     public string Subject { get; set; } = null!;
 

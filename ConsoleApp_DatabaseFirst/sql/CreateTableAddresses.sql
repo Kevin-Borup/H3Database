@@ -1,5 +1,3 @@
-DROP TABLE Addresses
-
 CREATE TABLE Addresses (
 	ID uniqueidentifier PRIMARY KEY not null,
 	Street varchar(255),

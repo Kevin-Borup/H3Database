@@ -17,7 +17,12 @@ namespace ConsoleApp_Codefirst
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQL2019;Database=SchoolDBCph1;Encrypt=False;Trusted_Connection=True;User Id=dbdebug;Password=Kode1234!;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 
@@ -31,9 +36,13 @@ namespace ConsoleApp_Codefirst
 
                 context.Students.Add(newStudent);
                 context.SaveChanges();
+            }
 
+            using (var context = new SchoolDbCph())
+            {
+                // Retrieve the student
                 var retrievedStudent = context.Students.FirstOrDefault(s => s.Name == "John Doe");
-                Console.WriteLine($"Retrieved Student: {retrievedStudent.Name}, Student Number: {retrievedStudent.studentNumber}");
+                Console.WriteLine($"Retrieved Student: {retrievedStudent.Name}, Student Number: {retrievedStudent.studentID}");
             }
         }
     }

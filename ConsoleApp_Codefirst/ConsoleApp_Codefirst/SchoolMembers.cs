@@ -44,6 +44,7 @@ namespace ConsoleApp_Codefirst
 
     public class Teacher : Person
     {
+        public int TeacherID { get; set; }
         public string subject { get; set; }
         public List<Course> courses { get; set; }
 
@@ -61,7 +62,7 @@ namespace ConsoleApp_Codefirst
 
     public class Student : Person
     {
-        public int studentNumber { get; set; }
+        public int studentID { get; set; }
         public double averageMark
         {
             get
@@ -80,7 +81,7 @@ namespace ConsoleApp_Codefirst
         public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
             : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
         {
-            this.studentNumber = studentNumber;
+            this.studentID = studentNumber;
             this.grades = null;
             this.courses = null;
         }
@@ -96,7 +97,8 @@ namespace ConsoleApp_Codefirst
 
     public class Address
     {
-        public int Id { get; set; }
+        [Key]
+        public int ID { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
