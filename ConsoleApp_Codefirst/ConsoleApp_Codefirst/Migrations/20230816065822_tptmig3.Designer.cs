@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleApp_Codefirst.Migrations
 {
     [DbContext(typeof(SchoolDbCph))]
-    [Migration("20230815124909_SchoolDBCph1")]
-    partial class SchoolDBCph1
+    [Migration("20230816065822_tptmig3")]
+    partial class tptmig3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,24 +25,13 @@ namespace ConsoleApp_Codefirst.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.HasSequence("AddressSequence");
-
-            modelBuilder.HasSequence("CourseSequence");
-
-            modelBuilder.HasSequence("GradeSequence");
-
-            modelBuilder.HasSequence("LibraryCardSequence");
-
-            modelBuilder.HasSequence("PersonSequence");
-
             modelBuilder.Entity("ConsoleApp_Codefirst.Address", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [AddressSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -67,17 +56,16 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("Addresses");
 
-                    b.UseTpcMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Course", b =>
                 {
                     b.Property<int>("CourseID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [CourseSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("CourseID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseID"));
 
                     b.Property<string>("CourseName")
                         .IsRequired()
@@ -87,17 +75,16 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("Courses");
 
-                    b.UseTpcMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Grade", b =>
                 {
                     b.Property<int>("gradeID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [GradeSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("gradeID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("gradeID"));
 
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
@@ -115,17 +102,16 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("Grades");
 
-                    b.UseTpcMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.LibraryCard", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [LibraryCardSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("UserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -137,17 +123,16 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("LibraryCards");
 
-                    b.UseTpcMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ConsoleApp_Codefirst.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [PersonSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AddressID")
                         .HasColumnType("int");
@@ -175,7 +160,7 @@ namespace ConsoleApp_Codefirst.Migrations
 
                     b.ToTable("People");
 
-                    b.UseTpcMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("CourseStudent", b =>
@@ -284,6 +269,24 @@ namespace ConsoleApp_Codefirst.Migrations
                     b.HasOne("ConsoleApp_Codefirst.Course", null)
                         .WithMany()
                         .HasForeignKey("coursesCourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleApp_Codefirst.Student", b =>
+                {
+                    b.HasOne("ConsoleApp_Codefirst.Person", null)
+                        .WithOne()
+                        .HasForeignKey("ConsoleApp_Codefirst.Student", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleApp_Codefirst.Teacher", b =>
+                {
+                    b.HasOne("ConsoleApp_Codefirst.Person", null)
+                        .WithOne()
+                        .HasForeignKey("ConsoleApp_Codefirst.Teacher", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

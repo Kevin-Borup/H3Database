@@ -17,20 +17,20 @@ namespace ConsoleApp_Codefirst
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQL2019;Database=SchoolDBCph1;Encrypt=False;Trusted_Connection=True;User Id=dbdebug;Password=Kode1234!;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQL2019;Database=SchoolDBCphTpt;Encrypt=False;Trusted_Connection=True;User Id=dbdebug;Password=Kode1234!;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Person>(e => e.UseTpcMappingStrategy());
-            modelBuilder.Entity<Teacher>(e => e.UseTpcMappingStrategy());
-            modelBuilder.Entity<Student>(e => e.UseTpcMappingStrategy());
-            modelBuilder.Entity<Grade>(e => e.UseTpcMappingStrategy());
-            modelBuilder.Entity<Address>(e => e.UseTpcMappingStrategy());
-            modelBuilder.Entity<Course>(e => e.UseTpcMappingStrategy());
-            modelBuilder.Entity<LibraryCard>(e => e.UseTpcMappingStrategy());
+            modelBuilder.Entity<Person>(e => e.UseTptMappingStrategy());
+            modelBuilder.Entity<Teacher>(e => e.UseTptMappingStrategy());
+            modelBuilder.Entity<Student>(e => e.UseTptMappingStrategy());
+            modelBuilder.Entity<Grade>(e => e.UseTptMappingStrategy());
+            modelBuilder.Entity<Address>(e => e.UseTptMappingStrategy());
+            modelBuilder.Entity<Course>(e => e.UseTptMappingStrategy());
+            modelBuilder.Entity<LibraryCard>(e => e.UseTptMappingStrategy());
         }
     }
 

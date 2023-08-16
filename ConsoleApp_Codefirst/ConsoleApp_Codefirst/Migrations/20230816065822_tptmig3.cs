@@ -6,31 +6,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ConsoleApp_Codefirst.Migrations
 {
     /// <inheritdoc />
-    public partial class SchoolDBCph1 : Migration
+    public partial class tptmig3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateSequence(
-                name: "AddressSequence");
-
-            migrationBuilder.CreateSequence(
-                name: "CourseSequence");
-
-            migrationBuilder.CreateSequence(
-                name: "GradeSequence");
-
-            migrationBuilder.CreateSequence(
-                name: "LibraryCardSequence");
-
-            migrationBuilder.CreateSequence(
-                name: "PersonSequence");
-
             migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [AddressSequence]"),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -46,7 +32,8 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    CourseID = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [CourseSequence]"),
+                    CourseID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -58,7 +45,8 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "LibraryCards",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [LibraryCardSequence]"),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RentedBooks = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -71,7 +59,8 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "People",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [PersonSequence]"),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -99,28 +88,17 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [PersonSequence]"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressID = table.Column<int>(type: "int", nullable: false),
-                    LibraryCardUserId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     studentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_Addresses_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Addresses",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Students_LibraryCards_LibraryCardUserId",
-                        column: x => x.LibraryCardUserId,
-                        principalTable: "LibraryCards",
-                        principalColumn: "UserId",
+                        name: "FK_Students_People_Id",
+                        column: x => x.Id,
+                        principalTable: "People",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -128,12 +106,7 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "Teachers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [PersonSequence]"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressID = table.Column<int>(type: "int", nullable: false),
-                    LibraryCardUserId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     TeacherID = table.Column<int>(type: "int", nullable: false),
                     subject = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -141,16 +114,10 @@ namespace ConsoleApp_Codefirst.Migrations
                 {
                     table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teachers_Addresses_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Addresses",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Teachers_LibraryCards_LibraryCardUserId",
-                        column: x => x.LibraryCardUserId,
-                        principalTable: "LibraryCards",
-                        principalColumn: "UserId",
+                        name: "FK_Teachers_People_Id",
+                        column: x => x.Id,
+                        principalTable: "People",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -182,7 +149,8 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "Grades",
                 columns: table => new
                 {
-                    gradeID = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [GradeSequence]"),
+                    gradeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     value = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: true)
@@ -245,26 +213,6 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "IX_People_LibraryCardUserId",
                 table: "People",
                 column: "LibraryCardUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_AddressID",
-                table: "Students",
-                column: "AddressID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_LibraryCardUserId",
-                table: "Students",
-                column: "LibraryCardUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teachers_AddressID",
-                table: "Teachers",
-                column: "AddressID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teachers_LibraryCardUserId",
-                table: "Teachers",
-                column: "LibraryCardUserId");
         }
 
         /// <inheritdoc />
@@ -280,9 +228,6 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "Grades");
 
             migrationBuilder.DropTable(
-                name: "People");
-
-            migrationBuilder.DropTable(
                 name: "Courses");
 
             migrationBuilder.DropTable(
@@ -292,25 +237,13 @@ namespace ConsoleApp_Codefirst.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
+                name: "People");
+
+            migrationBuilder.DropTable(
                 name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "LibraryCards");
-
-            migrationBuilder.DropSequence(
-                name: "AddressSequence");
-
-            migrationBuilder.DropSequence(
-                name: "CourseSequence");
-
-            migrationBuilder.DropSequence(
-                name: "GradeSequence");
-
-            migrationBuilder.DropSequence(
-                name: "LibraryCardSequence");
-
-            migrationBuilder.DropSequence(
-                name: "PersonSequence");
         }
     }
 }

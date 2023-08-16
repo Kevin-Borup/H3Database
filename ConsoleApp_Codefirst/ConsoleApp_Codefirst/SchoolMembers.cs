@@ -119,6 +119,7 @@ namespace ConsoleApp_Codefirst
     public class Grade
     {
         [Required]
+        [Key]
         public int gradeID { get; set; }
         [Required]
         public string subject { get; set; }
