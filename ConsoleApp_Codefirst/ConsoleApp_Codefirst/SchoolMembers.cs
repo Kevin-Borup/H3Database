@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp_Codefirst
 {
+    // Represents a person with common attributes
     public class Person
     {
         [Key]
@@ -24,24 +25,11 @@ namespace ConsoleApp_Codefirst
 
         public Person(int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
         {
-            Id = id;
-            Name = name;
-            PhoneNumber = phoneNumber;
-            EmailAddress = emailAddress;
-
-            LibraryCard = null;
-
-            Address = new Address
-            {
-                Street = street,
-                City = city,
-                State = state,
-                Zipcode = zipcode,
-                Country = country
-            };
+            // Initialize the properties of the person
         }
     }
 
+    // Represents a teacher, inherits from Person
     public class Teacher : Person
     {
         public int TeacherID { get; set; }
@@ -60,6 +48,7 @@ namespace ConsoleApp_Codefirst
         }
     }
 
+    // Represents a student, inherits from Person
     public class Student : Person
     {
         public int studentID { get; set; }
@@ -81,12 +70,11 @@ namespace ConsoleApp_Codefirst
         public Student(int studentNumber, int id, string name, string phoneNumber, string emailAddress, string street, string city, string state, int zipcode, string country)
             : base(id, name, phoneNumber, emailAddress, street, city, state, zipcode, country)
         {
-            this.studentID = studentNumber;
-            this.grades = null;
-            this.courses = null;
+            // Initialize student-specific properties
         }
     }
 
+    // Represents a library card for a user
     public class LibraryCard
     {
         [Key]
@@ -95,6 +83,7 @@ namespace ConsoleApp_Codefirst
         public DateTime CreationDate { get; set; }
     }
 
+    // Represents an address
     public class Address
     {
         [Key]
@@ -106,6 +95,7 @@ namespace ConsoleApp_Codefirst
         public string Country { get; set; }
     }
 
+    // Represents a course
     public class Course
     {
         [Key]
@@ -115,6 +105,7 @@ namespace ConsoleApp_Codefirst
         public List<Teacher> Teachers { get; set; }
     }
 
+    // Represents a grade for a subject
     public class Grade
     {
         [Required]
